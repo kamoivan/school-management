@@ -5,59 +5,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Enseignant</title>
+    <title>Détail enseignant</title>
+
+    <link rel="stylesheet" href="/css/teacher-show.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Détails de l'enseignant</h1>
+    <header class="topbar">
 
-        <nav>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/teachers">Liste des enseignants</a>
-        </nav>
+        <div class="container topbar-content">
+
+            <h1>
+                <i class="fa-solid fa-school"></i>
+                Gestion Scolaire
+            </h1>
+
+            <nav class="main-nav">
+
+                <a href="/dashboard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+
+                <a href="/students">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Étudiants
+                </a>
+
+                <a href="/teachers" class="active">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    Enseignants
+                </a>
+
+                <a href="/payments">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    Paiements
+                </a>
+
+                <a href="/logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Déconnexion
+                </a>
+
+            </nav>
+
+        </div>
+
     </header>
 
-    <main>
+    <main class="page-content">
 
-        <h2>
-            <?= htmlspecialchars(
-            $teacher['first_name'] . ' ' . $teacher['last_name']
-        ) ?>
-        </h2>
+        <div class="container">
 
-        <dl>
+            <div class="page-header">
 
-            <dt>ID</dt>
-            <dd><?= (int) $teacher['id'] ?></dd>
+                <div>
+                    <h2>Détail enseignant</h2>
+                    <p>Consultez les informations de cet enseignant.</p>
+                </div>
 
-            <dt>Prénom</dt>
-            <dd><?= htmlspecialchars($teacher['first_name']) ?></dd>
+                <a href="/teachers" class="back-button">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour aux enseignants
+                </a>
 
-            <dt>Nom</dt>
-            <dd><?= htmlspecialchars($teacher['last_name']) ?></dd>
+            </div>
 
-            <dt>Email</dt>
-            <dd><?= htmlspecialchars($teacher['email'] ?? '') ?></dd>
+            <div class="teacher-card">
 
-            <dt>Téléphone</dt>
-            <dd><?= htmlspecialchars($teacher['phone'] ?? '') ?></dd>
+                <div class="teacher-header">
 
-            <dt>Spécialité</dt>
-            <dd><?= htmlspecialchars($teacher['speciality'] ?? '') ?></dd>
+                    <div class="teacher-avatar">
+                        <?= strtoupper(
+                            substr($teacher['first_name'], 0, 1)
+                            . substr($teacher['last_name'], 0, 1)
+                        ) ?>
+                    </div>
 
-            <dt>Date d'embauche</dt>
-            <dd><?= htmlspecialchars($teacher['hire_date'] ?? '') ?></dd>
+                    <div class="teacher-title">
 
-            <dt>Statut</dt>
-            <dd><?= htmlspecialchars($teacher['status']) ?></dd>
+                        <h3>
+                            <?= htmlspecialchars(
+                                $teacher['first_name'] . ' ' . $teacher['last_name']
+                            ) ?>
+                        </h3>
 
-        </dl>
+                        <span class="status-badge status-<?= htmlspecialchars($teacher['status']) ?>">
+                            <?= $teacher['status'] === 'active' ? 'Actif' : 'Inactif' ?>
+                        </span>
 
-        <a href="/teachers/edit?id=<?= (int) $teacher['id'] ?>">
-            Modifier
-        </a>
+                    </div>
+
+                </div>
+
+                <div class="teacher-info">
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-hashtag"></i>
+                            ID
+                        </span>
+
+                        <strong>
+                            <?= (int) $teacher['id'] ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-envelope"></i>
+                            Email
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($teacher['email'] ?? '') ?: 'Non renseigné' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-phone"></i>
+                            Téléphone
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($teacher['phone'] ?? '') ?: 'Non renseigné' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-book-open"></i>
+                            Spécialité
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($teacher['speciality'] ?? '') ?: 'Non renseignée' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Date d'embauche
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($teacher['hire_date'] ?? '') ?: 'Non renseignée' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-user-check"></i>
+                            Statut
+                        </span>
+
+                        <strong>
+                            <?= $teacher['status'] === 'active' ? 'Actif' : 'Inactif' ?>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <a href="/teachers/edit?id=<?= (int) $teacher['id'] ?>" class="edit-button">
+                        <i class="fa-solid fa-pen"></i>
+                        Modifier
+                    </a>
+
+                    <a href="/teachers" class="cancel-button">
+                        Retour
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </main>
 

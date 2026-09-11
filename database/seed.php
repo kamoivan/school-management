@@ -5,11 +5,18 @@ require_once __DIR__ . '/../models/User.php';
 
 $userModel = new User($pdo);
 
-$userModel->create(
-    'Administrateur',
-    'admin@school.test',
-    'admin123',
-    'admin'
-);
+$existingUser = $userModel->findByEmail('admin@school.test');
 
-echo "Administrateur créé avec succès.";
+if (!$existingUser) {
+    $userModel->create(
+        'Administrateur',
+        'admin@school.test',
+        'admin123',
+        'admin'
+    );
+
+    echo "Administrateur créé avec succès.";
+    exit;
+}
+
+echo "L'administrateur existe déjà.";

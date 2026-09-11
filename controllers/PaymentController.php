@@ -14,31 +14,24 @@ class PaymentController
         $this->paymentModel = new Payment($pdo);
         $this->studentModel = new Student($pdo);
     }
+public function index(): void
+{
+    requireAuth();
 
-    public function index(): void
-    {
-        requireAuth();
+    $search = trim($_GET['search'] ?? '');
+    $status = $_GET['status'] ?? '';
+    $dateStart = $_GET['date_start'] ?? '';
+    $dateEnd = $_GET['date_end'] ?? '';
 
-        $search = trim($_GET['search'] ?? '');
-        $status = $_GET['status'] ?? '';
+    $payments = $this->paymentModel->getAll(
+        $search,
+        $status,
+        $dateStart,
+        $dateEnd
+    );
 
-        $allowedStatuses = [
-            'pending',
-            'paid',
-            'cancelled'
-        ];
-
-        if (!in_array($status, $allowedStatuses, true)) {
-            $status = '';
-        }
-
-        $payments = $this->paymentModel->getAll(
-            $search,
-            $status
-        );
-
-        require_once __DIR__ . '/../views/payments/index.php';
-    }
+    require_once __DIR__ . '/../views/payments/index.php';
+}
 
     public function create(): void
     {

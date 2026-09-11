@@ -1,0 +1,161 @@
+.welcome-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background: #f4f6f8;
+}
+
+.welcome-card {
+  width: min(680px, 100%);
+  padding: 50px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 8px 30px rgba(15, 23, 42, 0.06);
+}
+
+/* ==============================
+   ICON
+   ============================== */
+
+.welcome-icon {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.welcome-icon i {
+  font-size: 32px;
+}
+
+/* ==============================
+   TEXT
+   ============================== */
+
+.welcome-label {
+  margin: 0 0 8px;
+
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+}
+
+.welcome-card h1 {
+  margin: 0;
+
+  color: #111827;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.welcome-description {
+  max-width: 520px;
+  margin: 16px auto 30px;
+
+  color: #6b7280;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ==============================
+   FEATURES
+   ============================== */
+
+.welcome-features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+
+  margin-bottom: 30px;
+}
+
+.welcome-feature {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 14px 10px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+
+  background: #f9fafb;
+
+  color: #374151;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.welcome-feature i {
+  color: #2563eb;
+  font-size: 16px;
+}
+
+/* ==============================
+   BUTTON
+   ============================== */
+
+.welcome-button {
+  width: 100%;
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 10px 16px;
+
+  border-radius: 7px;
+
+  background: #2563eb;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  transition: background 0.15s ease;
+}
+
+.welcome-button:hover {
+  background: #1d4ed8;
+}
+
+.welcome-button i {
+  font-size: 14px;
+}
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 600px) {
+  .welcome-page {
+    padding: 20px 12px;
+  }
+
+  .welcome-card {
+    padding: 35px 22px;
+  }
+
+  .welcome-card h1 {
+    font-size: 26px;
+  }
+
+  .welcome-features {
+    grid-template-columns: 1fr;
+  }
+}

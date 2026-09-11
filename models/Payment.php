@@ -11,8 +11,11 @@ class Payment
 
     public function getAll(
         string $search = '',
-        string $status = ''
+        string $status = '',
+        string $dateStart = '',
+        string $dateEnd = ''
     ): array {
+
         $sql = "
             SELECT
                 payments.*,
@@ -21,14 +24,15 @@ class Payment
             FROM payments
             INNER JOIN students
                 ON payments.student_id = students.id
-            WHERE 1 = 1
         ";
 
+        $conditions = [];
         $params = [];
 
+
         if ($search !== '') {
-            $sql .= "
-                AND (
+            $conditions[] = "
+                (
                     payments.reference LIKE :search
                     OR students.first_name LIKE :search
                     OR students.last_name LIKE :search
@@ -38,10 +42,30 @@ class Payment
             $params['search'] = '%' . $search . '%';
         }
 
+
         if ($status !== '') {
-            $sql .= " AND payments.status = :status";
+            $conditions[] = "payments.status = :status";
 
             $params['status'] = $status;
+        }
+
+
+        if ($dateStart !== '') {
+            $conditions[] = "payments.payment_date >= :date_start";
+
+            $params['date_start'] = $dateStart;
+        }
+
+
+        if ($dateEnd !== '') {
+            $conditions[] = "payments.payment_date <= :date_end";
+
+            $params['date_end'] = $dateEnd;
+        }
+
+
+        if (!empty($conditions)) {
+            $sql .= " WHERE " . implode(" AND ", $conditions);
         }
 
         $sql .= " ORDER BY payments.id DESC";

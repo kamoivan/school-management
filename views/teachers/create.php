@@ -6,96 +6,230 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Ajouter un enseignant</title>
+
+    <link rel="stylesheet" href="/css/teacher-create.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
-    <header>
-        <h1>Ajouter un enseignant</h1>
+    <header class="topbar">
 
-        <nav>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/teachers">Retour aux enseignants</a>
-        </nav>
-    </header>
+        <div class="container topbar-content">
 
-    <main>
+            <h1>
+                <i class="fa-solid fa-school"></i>
+                Gestion Scolaire
+            </h1>
 
-        <?php if (!empty($errors)): ?>
+            <nav class="main-nav">
 
-        <div>
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                <li><?= htmlspecialchars($error) ?></li>
-                <?php endforeach; ?>
-            </ul>
+                <a href="/dashboard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+
+                <a href="/students">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Étudiants
+                </a>
+
+                <a href="/teachers" class="active">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    Enseignants
+                </a>
+
+                <a href="/payments">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    Paiements
+                </a>
+
+                <a href="/logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Déconnexion
+                </a>
+
+            </nav>
+
         </div>
 
-        <?php endif; ?>
+    </header>
 
-        <form method="POST" action="/teachers/create">
+    <main class="page-content">
 
-            <div>
-                <label for="first_name">Prénom</label>
+        <div class="container">
 
-                <input type="text" id="first_name" name="first_name"
-                    value="<?= htmlspecialchars($_POST['first_name'] ?? '') ?>" required>
+            <div class="page-header">
+
+                <div>
+                    <h2>Ajouter un enseignant</h2>
+                    <p>Enregistrez un nouvel enseignant dans l'établissement.</p>
+                </div>
+
+                <a href="/teachers" class="back-button">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour aux enseignants
+                </a>
+
             </div>
 
-            <div>
-                <label for="last_name">Nom</label>
+            <?php if (!empty($errors)): ?>
 
-                <input type="text" id="last_name" name="last_name"
-                    value="<?= htmlspecialchars($_POST['last_name'] ?? '') ?>" required>
+            <div class="error-box">
+
+                <div class="error-title">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    Vérifiez les informations saisies
+                </div>
+
+                <div class="error-list">
+
+                    <?php foreach ($errors as $error): ?>
+
+                    <p><?= htmlspecialchars($error) ?></p>
+
+                    <?php endforeach; ?>
+
+                </div>
+
             </div>
 
-            <div>
-                <label for="email">Email</label>
+            <?php endif; ?>
 
-                <input type="email" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+            <div class="form-card">
+
+                <div class="form-header">
+
+                    <div class="form-icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </div>
+
+                    <div>
+                        <h3>Informations de l'enseignant</h3>
+                        <p>Renseignez les informations nécessaires à son enregistrement.</p>
+                    </div>
+
+                </div>
+
+                <form method="POST" action="/teachers/create">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="first_name">
+                                Prénom
+                                <span>*</span>
+                            </label>
+
+                            <input type="text" id="first_name" name="first_name"
+                                value="<?= htmlspecialchars($_POST['first_name'] ?? '') ?>" placeholder="Ex : Jean"
+                                required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="last_name">
+                                Nom
+                                <span>*</span>
+                            </label>
+
+                            <input type="text" id="last_name" name="last_name"
+                                value="<?= htmlspecialchars($_POST['last_name'] ?? '') ?>" placeholder="Ex : Dupont"
+                                required>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email
+                            </label>
+
+                            <input type="email" id="email" name="email"
+                                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+                                placeholder="Ex : jean@example.com">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Téléphone
+                            </label>
+
+                            <input type="text" id="phone" name="phone"
+                                value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>" placeholder="Ex : 690 00 00 00">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="speciality">
+                                Spécialité
+                            </label>
+
+                            <input type="text" id="speciality" name="speciality"
+                                value="<?= htmlspecialchars($_POST['speciality'] ?? '') ?>"
+                                placeholder="Ex : Mathématiques">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="hire_date">
+                                Date d'embauche
+                            </label>
+
+                            <input type="date" id="hire_date" name="hire_date"
+                                value="<?= htmlspecialchars($_POST['hire_date'] ?? '') ?>">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="status">
+                                Statut
+                            </label>
+
+                            <select id="status" name="status">
+
+                                <option value="active"
+                                    <?= ($_POST['status'] ?? 'active') === 'active' ? 'selected' : '' ?>>
+                                    Actif
+                                </option>
+
+                                <option value="inactive"
+                                    <?= ($_POST['status'] ?? '') === 'inactive' ? 'selected' : '' ?>>
+                                    Inactif
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-footer">
+
+                        <a href="/teachers" class="cancel-button">
+                            Annuler
+                        </a>
+
+                        <button type="submit" class="submit-button">
+                            <i class="fa-solid fa-floppy-disk"></i>
+                            Enregistrer l'enseignant
+                        </button>
+
+                    </div>
+
+                </form>
+
             </div>
 
-            <div>
-                <label for="phone">Téléphone</label>
-
-                <input type="text" id="phone" name="phone" value="<?= htmlspecialchars($_POST['phone'] ?? '') ?>">
-            </div>
-
-            <div>
-                <label for="speciality">Spécialité</label>
-
-                <input type="text" id="speciality" name="speciality"
-                    value="<?= htmlspecialchars($_POST['speciality'] ?? '') ?>">
-            </div>
-
-            <div>
-                <label for="hire_date">Date d'embauche</label>
-
-                <input type="date" id="hire_date" name="hire_date"
-                    value="<?= htmlspecialchars($_POST['hire_date'] ?? '') ?>">
-            </div>
-
-            <div>
-                <label for="status">Statut</label>
-
-                <select id="status" name="status">
-
-                    <option value="active" <?= ($_POST['status'] ?? 'active') === 'active' ? 'selected' : '' ?>>
-                        Actif
-                    </option>
-
-                    <option value="inactive" <?= ($_POST['status'] ?? '') === 'inactive' ? 'selected' : '' ?>>
-                        Inactif
-                    </option>
-
-                </select>
-            </div>
-
-            <button type="submit">
-                Enregistrer
-            </button>
-
-        </form>
+        </div>
 
     </main>
 

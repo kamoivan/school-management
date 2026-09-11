@@ -6,197 +6,285 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Dashboard Admin - Gestion Scolaire</title>
+
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="topbar">
 
-        <h1>Gestion Scolaire</h1>
+        <div class="container topbar-content">
 
-        <div>
-            <span>
-                Administrateur :
-                <?= htmlspecialchars($_SESSION['user_name']) ?>
-            </span>
+            <h1>Gestion Scolaire</h1>
 
-            <a href="/logout">Se déconnecter</a>
+            <div class="admin-info">
+
+                <span>
+                    Administrateur :
+                    <?= htmlspecialchars($_SESSION['user_name']) ?>
+                </span>
+
+                <a href="/logout" class="btn btn-danger">
+                    Se déconnecter
+                </a>
+
+            </div>
+
         </div>
 
     </header>
 
-    <main>
+    <main class="container dashboard">
 
-        <h2>Tableau de bord</h2>
+        <div class="page-header">
 
-        <p>
-            Bienvenue dans votre espace d'administration.
-        </p>
+            <div>
+                <h2>Tableau de bord</h2>
 
-        <!-- Navigation principale -->
+                <p>
+                    Bienvenue dans votre espace d'administration.
+                </p>
+            </div>
 
-        <section>
+        </div>
 
-            <h2>Gestion</h2>
 
-            <nav>
+        <section class="dashboard-section">
 
-                <a href="/students">
-                    Gestion des étudiants
+            <div class="section-header">
+                <h2>Gestion</h2>
+            </div>
+
+            <nav class="management-links">
+
+                <a href="/students" class="management-card">
+                    <strong>Étudiants</strong>
+                    <span>Gérer les étudiants</span>
                 </a>
 
-                <a href="/teachers">
-                    Gestion des enseignants
+                <a href="/teachers" class="management-card">
+                    <strong>Enseignants</strong>
+                    <span>Gérer les enseignants</span>
                 </a>
 
-                <a href="/payments">
-                    Gestion des paiements
+                <a href="/payments" class="management-card">
+                    <strong>Paiements</strong>
+                    <span>Gérer les paiements</span>
                 </a>
 
             </nav>
 
         </section>
 
-        <!-- Statistiques -->
 
-        <section>
 
-            <h2>Statistiques</h2>
+        <section class="dashboard-section">
 
-            <div>
+            <div class="section-header">
+                <h2>Statistiques</h2>
+            </div>
 
-                <div>
-                    <h3>Étudiants</h3>
-                    <strong><?= $studentsCount ?></strong>
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        Étudiants
+                    </span>
+
+                    <strong class="stat-value">
+                        <?= $studentsCount ?>
+                    </strong>
+
                 </div>
 
-                <div>
-                    <h3>Enseignants</h3>
-                    <strong><?= $teachersCount ?></strong>
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        Enseignants
+                    </span>
+
+                    <strong class="stat-value">
+                        <?= $teachersCount ?>
+                    </strong>
+
                 </div>
 
-                <div>
-                    <h3>Paiements</h3>
-                    <strong><?= $paymentsCount ?></strong>
+                <div class="stat-card">
+
+                    <span class="stat-label">
+                        Paiements
+                    </span>
+
+                    <strong class="stat-value">
+                        <?= $paymentsCount ?>
+                    </strong>
+
                 </div>
 
             </div>
 
         </section>
 
-        <!-- Étudiants récents -->
 
-        <section>
+        <div class="recent-grid">
 
-            <h2>Derniers étudiants</h2>
 
-            <?php if (empty($recentStudents)): ?>
+            <section class="dashboard-section">
 
-            <p>Aucun étudiant enregistré.</p>
+                <div class="section-header">
 
-            <?php else: ?>
+                    <h2>Derniers étudiants</h2>
 
-            <ul>
+                    <a href="/students" class="section-link">
+                        Voir tout
+                    </a>
 
-                <?php foreach ($recentStudents as $student): ?>
+                </div>
 
-                <li>
+                <?php if (empty($recentStudents)): ?>
 
-                    <?= htmlspecialchars(
-                            $student['first_name'] . ' ' . $student['last_name']
-                        ) ?>
+                <p class="empty-message">
+                    Aucun étudiant enregistré.
+                </p>
 
-                    -
+                <?php else: ?>
 
-                    <?= htmlspecialchars($student['formation'] ?? '') ?>
+                <ul class="recent-list">
 
-                </li>
+                    <?php foreach ($recentStudents as $student): ?>
 
-                <?php endforeach; ?>
+                    <li>
 
-            </ul>
+                        <div>
+                            <strong>
+                                <?= htmlspecialchars(
+                                            $student['first_name'] . ' ' . $student['last_name']
+                                        ) ?>
+                            </strong>
 
-            <a href="/students">
-                Voir tous les étudiants
-            </a>
+                            <span>
+                                <?= htmlspecialchars(
+                                            $student['formation'] ?? ''
+                                        ) ?>
+                            </span>
+                        </div>
 
-            <?php endif; ?>
+                    </li>
 
-            <h2>Enseignants récents</h2>
+                    <?php endforeach; ?>
 
-            <?php if (empty($recentTeachers)): ?>
+                </ul>
 
-            <p>Aucun enseignant enregistré.</p>
+                <?php endif; ?>
 
-            <?php else: ?>
+            </section>
 
-            <ul>
 
-                <?php foreach ($recentTeachers as $teacher): ?>
 
-                <li>
+            <section class="dashboard-section">
 
-                    <?= htmlspecialchars(
-                            $teacher['first_name'] . ' ' . $teacher['last_name']
-                        ) ?>
+                <div class="section-header">
 
-                    -
+                    <h2>Derniers enseignants</h2>
 
-                    <?= htmlspecialchars($teacher['speciality'] ?? '') ?>
+                    <a href="/teachers" class="section-link">
+                        Voir tout
+                    </a>
 
-                </li>
+                </div>
 
-                <?php endforeach; ?>
+                <?php if (empty($recentTeachers)): ?>
 
-            </ul>
+                <p class="empty-message">
+                    Aucun enseignant enregistré.
+                </p>
 
-            <a href="/teachers">
-                Voir tous les enseignants
-            </a>
+                <?php else: ?>
 
-            <?php endif; ?>
+                <ul class="recent-list">
 
-        </section>
+                    <?php foreach ($recentTeachers as $teacher): ?>
 
-        <!-- Paiements récents -->
+                    <li>
 
-        <section>
+                        <div>
+                            <strong>
+                                <?= htmlspecialchars(
+                                            $teacher['first_name'] . ' ' . $teacher['last_name']
+                                        ) ?>
+                            </strong>
 
-            <h2>Derniers paiements</h2>
+                            <span>
+                                <?= htmlspecialchars(
+                                            $teacher['speciality'] ?? ''
+                                        ) ?>
+                            </span>
+                        </div>
+
+                    </li>
+
+                    <?php endforeach; ?>
+
+                </ul>
+
+                <?php endif; ?>
+
+            </section>
+
+        </div>
+
+
+        <section class="dashboard-section">
+
+            <div class="section-header">
+
+                <h2>Derniers paiements</h2>
+
+                <a href="/payments" class="section-link">
+                    Voir tout
+                </a>
+
+            </div>
 
             <?php if (empty($recentPayments)): ?>
 
-            <p>Aucun paiement enregistré.</p>
+            <p class="empty-message">
+                Aucun paiement enregistré.
+            </p>
 
             <?php else: ?>
 
-            <ul>
+            <ul class="recent-list payments-list">
 
                 <?php foreach ($recentPayments as $payment): ?>
 
                 <li>
 
-                    <?= htmlspecialchars($payment['reference']) ?>
+                    <div>
 
-                    -
+                        <strong>
+                            <?= htmlspecialchars($payment['reference']) ?>
+                        </strong>
 
-                    <?= htmlspecialchars(
-                            $payment['first_name'] . ' ' . $payment['last_name']
-                        ) ?>
+                        <span>
+                            <?= htmlspecialchars(
+                                        $payment['first_name'] . ' ' . $payment['last_name']
+                                    ) ?>
+                        </span>
 
-                    -
+                    </div>
 
-                    <?= htmlspecialchars($payment['amount'] . ' XAF') ?>
+                    <strong>
+                        <?= htmlspecialchars($payment['amount'] . ' XAF') ?>
+                    </strong>
 
                 </li>
 
                 <?php endforeach; ?>
 
             </ul>
-
-            <a href="/payments">
-                Voir tous les paiements
-            </a>
 
             <?php endif; ?>
 

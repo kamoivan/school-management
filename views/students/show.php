@@ -8,71 +8,198 @@
 
     <title>Détail étudiant</title>
 
+    <link rel="stylesheet" href="/css/student-show.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 </head>
 
 <body>
 
-    <header>
+    <header class="topbar">
 
-        <h1>Gestion Scolaire</h1>
+        <div class="container topbar-content">
 
-        <nav>
-            <a href="/dashboard">Dashboard</a>
-            <a href="/students">Étudiants</a>
-        </nav>
+            <h1>
+                <i class="fa-solid fa-school"></i>
+                Gestion Scolaire
+            </h1>
+
+            <nav class="main-nav">
+
+                <a href="/dashboard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Dashboard
+                </a>
+
+                <a href="/students" class="active">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    Étudiants
+                </a>
+
+                <a href="/teachers">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    Enseignants
+                </a>
+
+                <a href="/payments">
+                    <i class="fa-solid fa-money-bill-wave"></i>
+                    Paiements
+                </a>
+
+                <a href="/logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Déconnexion
+                </a>
+
+            </nav>
+
+        </div>
 
     </header>
 
-    <main>
+    <main class="page-content">
 
-        <h2>
-            <?= htmlspecialchars(
-        $student['first_name'] . ' ' . $student['last_name']
-    ) ?>
-        </h2>
+        <div class="container">
 
-        <p>
-            <strong>Email :</strong>
-            <?= htmlspecialchars($student['email'] ?? '') ?>
-        </p>
+            <div class="page-header">
 
-        <p>
-            <strong>Téléphone :</strong>
-            <?= htmlspecialchars($student['phone'] ?? '') ?>
-        </p>
+                <div>
+                    <h2>Détail étudiant</h2>
+                    <p>Consultez les informations de cet étudiant.</p>
+                </div>
 
-        <p>
-            <strong>Date de naissance :</strong>
-            <?= htmlspecialchars($student['birth_date'] ?? '') ?>
-        </p>
+                <a href="/students" class="back-button">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour aux étudiants
+                </a>
 
-        <p>
-            <strong>Adresse :</strong>
-            <?= htmlspecialchars($student['address'] ?? '') ?>
-        </p>
+            </div>
 
-        <p>
-            <strong>Formation :</strong>
-            <?= htmlspecialchars($student['formation'] ?? '') ?>
-        </p>
+            <div class="student-card">
 
-        <p>
-            <strong>Date d'inscription :</strong>
-            <?= htmlspecialchars($student['registration_date']) ?>
-        </p>
+                <div class="student-header">
 
-        <p>
-            <strong>Statut :</strong>
-            <?= htmlspecialchars($student['status']) ?>
-        </p>
+                    <div class="student-avatar">
+                        <?= strtoupper(
+                            substr($student['first_name'], 0, 1)
+                            . substr($student['last_name'], 0, 1)
+                        ) ?>
+                    </div>
 
-        <a href="/students/edit?id=<?= (int) $student['id'] ?>">
-            Modifier
-        </a>
+                    <div class="student-title">
 
-        <a href="/students">
-            Retour
-        </a>
+                        <h3>
+                            <?= htmlspecialchars(
+                                $student['first_name'] . ' ' . $student['last_name']
+                            ) ?>
+                        </h3>
+
+                        <span class="status-badge status-<?= htmlspecialchars($student['status']) ?>">
+                            <?= $student['status'] === 'active' ? 'Actif' : 'Inactif' ?>
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="student-info">
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-envelope"></i>
+                            Email
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($student['email'] ?? '') ?: 'Non renseigné' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-phone"></i>
+                            Téléphone
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($student['phone'] ?? '') ?: 'Non renseigné' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-calendar-days"></i>
+                            Date de naissance
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($student['birth_date'] ?? '') ?: 'Non renseignée' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-location-dot"></i>
+                            Adresse
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($student['address'] ?? '') ?: 'Non renseignée' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            Formation / Classe
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($student['formation'] ?? '') ?: 'Non renseignée' ?>
+                        </strong>
+
+                    </div>
+
+                    <div class="info-item">
+
+                        <span class="info-label">
+                            <i class="fa-solid fa-calendar-check"></i>
+                            Date d'inscription
+                        </span>
+
+                        <strong>
+                            <?= htmlspecialchars($student['registration_date']) ?>
+                        </strong>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer">
+
+                    <a href="/students/edit?id=<?= (int) $student['id'] ?>" class="edit-button">
+                        <i class="fa-solid fa-pen"></i>
+                        Modifier
+                    </a>
+
+                    <a href="/students" class="cancel-button">
+                        Retour
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </main>
 

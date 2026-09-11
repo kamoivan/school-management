@@ -1,0 +1,326 @@
+/* ==============================
+   RESET
+   ============================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6f8;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ==============================
+   LAYOUT
+   ============================== */
+
+.container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* ==============================
+   TOPBAR
+   ============================== */
+
+.topbar {
+  background: #1f2937;
+  color: #ffffff;
+  border-bottom: 1px solid #374151;
+}
+
+.topbar-content {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 14px;
+}
+
+/* ==============================
+   BUTTONS
+   ============================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.btn-danger:hover {
+  background: #b91c1c;
+}
+
+/* ==============================
+   DASHBOARD
+   ============================== */
+
+.dashboard {
+  padding-top: 35px;
+  padding-bottom: 50px;
+}
+
+.page-header {
+  margin-bottom: 30px;
+}
+
+.page-header h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  color: #111827;
+}
+
+.page-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* ==============================
+   SECTIONS
+   ============================== */
+
+.dashboard-section {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 22px;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
+}
+
+.section-header h2 {
+  margin: 0;
+  font-size: 19px;
+  color: #111827;
+}
+
+.section-link {
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.section-link:hover {
+  text-decoration: underline;
+}
+
+/* ==============================
+   MANAGEMENT LINKS
+   ============================== */
+
+.management-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.management-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: #f9fafb;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.management-card strong {
+  font-size: 16px;
+  color: #111827;
+}
+
+.management-card span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.management-card:hover {
+  background: #f3f4f6;
+  border-color: #cbd5e1;
+}
+
+/* ==============================
+   STATISTICS
+   ============================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.stat-card {
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  border-radius: 7px;
+  background: #f9fafb;
+}
+
+.stat-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 30px;
+  color: #111827;
+}
+
+/* ==============================
+   RECENT DATA
+   ============================== */
+
+.recent-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.recent-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recent-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 13px 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.recent-list li:last-child {
+  border-bottom: none;
+}
+
+.recent-list div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.recent-list strong {
+  font-size: 14px;
+  color: #111827;
+}
+
+.recent-list span {
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.payments-list > li > strong {
+  white-space: nowrap;
+}
+
+/* ==============================
+   EMPTY STATE
+   ============================== */
+
+.empty-message {
+  margin: 0;
+  padding: 20px 0;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* ==============================
+   RESPONSIVE
+   ============================== */
+
+@media (max-width: 800px) {
+  .topbar-content {
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .admin-info {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .management-links,
+  .stats-grid,
+  .recent-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: min(100% - 24px, 1180px);
+  }
+
+  .dashboard {
+    padding-top: 25px;
+  }
+
+  .page-header h2 {
+    font-size: 24px;
+  }
+
+  .admin-info {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dashboard-section {
+    padding: 17px;
+  }
+}
